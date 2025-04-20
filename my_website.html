@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>India's Anime Revolution</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Background_1.jpg');
+            background-size: cover;
+            /* ensures it covers the entire area */
+            background-position: center;
+            /* centers the image */
+            background-repeat: no-repeat;
+            /* prevents tiling */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Button styling */
+        button {
+            color: white;
+            text-decoration: none;
+            font-size: 25px;
+            border: none;
+            background: rgba(251, 251, 251, 0.2);
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
+
+        button::before {
+            margin-left: auto;
+        }
+
+        button::after,
+        button::before {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #f44336;
+            display: block;
+            transition: 0.5s;
+        }
+
+        button:hover::after,
+        button:hover::before {
+            width: 100%;
+        }
+
+        /* Overlay for background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 50% transparent black overlay */
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        h2,
+        h3 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #f9f9f9;
+        }
+
+        ul {
+            padding-left: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-top: 3rem;
+            text-align: center;
+            border-top: 1px solid #fff;
+            padding-top: 2rem;
+        }
+
+        footer p {
+            color: #bbb;
+        }
+
+        footer p:last-child {
+            margin-top: 1rem;
+            color: #fff;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        .card {
+            width: 500px;
+            height: 200px;
+            background-image: linear-gradient(163deg, #FFD700 0%, #FFD700 100%);
+            border-radius: 20px;
+            transition: all 0.3s;
+            margin: 0 auto;
+            /* center horizontally */
+        }
+
+        .card2 {
+            width: 500px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 1.0);
+            /* Transparent dark background */
+            border-radius: 20px;
+            transition: all 0.2s;
+            display: flex;
+            margin-left: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card2:hover {
+            transform: scale(0.98);
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Fewer columns for larger images */
+            gap: 30px;
+            justify-items: center;
+            padding: 20px;
+        }
+
+        .imagecard {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+            /* Half of 1368 to keep things clean on most screens */
+            aspect-ratio: 16 / 9;
+            background: mediumturquoise;
+            font-size: 25px;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .imagecard img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .imagecard::after {
+            position: absolute;
+            content: attr(data-desc);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            font-size: 18px;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            box-sizing: border-box;
+        }
+
+        .imagecard:hover::after {
+            opacity: 1;
+        }
+
+        .glow-container {
+            position: relative;
+            padding: 3px;
+            background: linear-gradient(90deg, #03a9f4, #f441a5);
+            border-radius: 0.9em;
+            transition: all 0.4s ease;
+            display: inline-block;
+            /* allows content sizing */
+            margin: 2rem auto;
+        }
+
+        .glow-container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 0.9em;
+            z-index: -10;
+            filter: blur(0);
+            transition: filter 0.4s ease;
+        }
+
+        .glow-container:hover::before {
+            background: linear-gradient(90deg, #03a9f4, #f441a5);
+            filter: blur(1.2em);
+        }
+
+        .glow-container:active::before {
+            filter: blur(0.2em);
+        }
+
+        .glow-button {
+            font-size: 1.4em;
+            padding: 0.6em 0.8em;
+            border-radius: 0.5em;
+            border: none;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 2px 2px 3px #000000b4;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div> <!-- Overlay for darkening background -->
+    <div class="container">
+        <header>
+            <div class="card" style="margin: 0 auto;">
+                <div class="card2" style="display: flex; align-items: center; justify-content: center;">
+                    <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Logo_1.png" alt="Logo"
+                        class="logo" width="500">
+                </div>
+            </div>
+            <h1>India's Anime Revolution</h1>
+            <p>Support a bold dream—build an original Indian animation studio that tells our stories with global-quality
+                visuals and heart.</p>
+            <a href="https://milaap.org/fundraisers/support-gowtham-148" class="button">
+                <button>Support us here</button>
+            </a>
+        </header>
+
+
+        <section>
+            <h2>Hi, I’m Gowtham.</h2>
+            <p>Ever since I was a kid, I’ve loved animation. Like many of you, I grew up watching cartoons, anime, and
+                animated movies—but most of them were made outside India. That always made me wonder: why aren’t Indian
+                stories told through animation at a global level?</p>
+            <p>India has amazing stories. We have culture, mythology, history, and raw creative talent. But what we
+                don’t have is enough support for Indian animators to tell our own stories—our way. That’s why I’m
+                starting something big.</p>
+        </section>
+
+        <header>
+            <!-- Add this new section wherever you want the glowing button to appear -->
+            <div class="glow-container">
+                <button class="glow-button">MEET OUR WARRIORS</button>
+            </div>
+        </header>
+
+        <div class="grid-container">
+            <div class="imagecard"
+                data-desc="Creative Flame – He can summon fire that takes the form of glowing sketches and story scenes. His emotions fuel the intensity of the flame.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_1.jpg"
+                    style="width: 420px;height: 240px;" />
+            </div>
+            <div class="imagecard"
+                data-desc="Stone Memory – Wields ancient armor and weapons drawn from earth. Can shield and ground others with unwavering focus.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_2.jpg"
+                    style="width: 420px;height: 240px;" />
+            </div>
+            <div class="imagecard"
+                data-desc="Digital Winds – Can manipulate wind to create floating code glyphs and virtual currents. Moves with precision and speed.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_3.jpg"
+                    style="width: 480px;height: 240px;" />
+            </div>
+            <div class="imagecard"
+                data-desc="Mythic Flow – Uses water to reveal lost stories, memories, and ancient knowledge. His water can take narrative forms.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_4.jpg"
+                    style="width: 420px;height: 240px;" />
+            </div>
+            <div class="imagecard"
+                data-desc="Luminous Slash – Uses her glowing sword to cut through the dark, wielding light itself as an offensive power. The sword’s glow comes from her imagination and creativity, leaving radiant trails in its wake.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_5.jpg"
+                    style="width: 420px;height: 240px;" />
+            </div>
+            <div class="imagecard"
+                data-desc="Thunderstrike Blade – Channels lightning through her sword. Her blade can cut through air and strike with the speed of a thunderbolt, amplifying her voice to create shockwaves and lightning bolts.">
+                <img src="https://raw.githubusercontent.com/gowpolur/PQUAD_img/main/Image_6.jpg"
+                    style="width: 420px;height: 240px;" />
+            </div>
+        </div>
+
+
+        <section>
+            <h3>Why I’m Raising These Funds</h3>
+            <p>This fundraiser is to set up the first phase of the studio—finding a space, getting basic equipment, and
+                building a small but talented team. I want to start production on our first short film by the end of
+                this year (2025).</p>
+        </section>
+
+        <section>
+            <h3>Where Your Money Goes</h3>
+            <ul>
+                <li>Studio space and equipment (computers, software, drawing tablets)</li>
+                <li>Hiring young Indian animators and artists</li>
+                <li>Producing our first short film</li>
+                <li>Creating opportunities for fresh talent through workshops and mentorship</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What This Means</h2>
+            <p>This isn’t just about one studio. It’s about building a movement. A place where Indian stories are told
+                beautifully, powerfully, and with the kind of quality we’re used to seeing from big international
+                studios.</p>
+            <p>I can’t do this alone. Your support will help turn this dream into reality.</p>
+            <p>Even a small contribution makes a big difference. If you believe in Indian stories, creativity, and the
+                power of animation—please support and share.</p>
+        </section>
+        <header>
+            <a href="https://milaap.org/fundraisers/support-gowtham-148" class="button">
+                <button>Support us here</button>
+            </a>
+        </header>
+    </div>
+
+    <footer>
+        <p>NOTE: The prices and estimates mentioned in this document are based on current market research and may vary
+            at the time of actual setup. Costs can fluctuate depending on location, availability, and vendor pricing.
+        </p>
+        <p>We will ensure that every rupee is spent thoughtfully and transparently to build a functional,
+            cost-effective, and quality-driven animation studio.</p>
+        <p style="margin-top: 1rem;">Thank you.</p>
+    </footer>
+</body>
+
+</html>
